@@ -1,0 +1,47 @@
+name: CI/CD with Security Gates
+
+on: [push, pull_request]
+
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install bandit safety
+      working-directory: exercises/ex4-cicd-security-gates
+
+    - name: Run Bandit for static analysis
+      run: bandit -r .
+      working-directory: exercises/ex4-cicd-security-gates
+
+    - name: Run Safety for dependency checks
+      run: safety check
+      working-directory: exercises/ex4-cicd-security-gates
+
+    - name: Run OWASP ZAP for DAST
+      uses: zaproxy/action-full-scan@v0.6.0
+      with:
+        target: 'http://localhost:5000'
+      env:
+        JAVA_TOOL_OPTIONS: "-Djava.awt.headless=true"
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: security-tests
+
+    steps:
+    - name: Deploy to Production
+      run: |
+        echo "Deploying to production..."
+      if: success()
