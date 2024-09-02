@@ -1,0 +1,37 @@
+name: Advanced Security Testing Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install bandit safety
+      working-directory: exercises/exercise3-advanced-security-testing
+
+    - name: Run Bandit for static analysis
+      run: bandit -r .
+      working-directory: exercises/exercise3-advanced-security-testing
+
+    - name: Run Safety for dependency checks
+      run: safety check
+      working-directory: exercises/exercise3-advanced-security-testing
+
+    - name: Run OWASP ZAP for DAST
+      uses: zaproxy/action-full-scan@v0.6.0
+      with:
+        target: 'http://localhost:5000'
+      env:
+        JAVA_TOOL_OPTIONS: "-Djava.awt.headless=true"

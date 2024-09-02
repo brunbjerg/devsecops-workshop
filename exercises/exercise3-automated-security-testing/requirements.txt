@@ -1,0 +1,7 @@
+Flask==2.0.1
+cryptography==3.4.7
+bcrypt==3.2.0
+pyjwt==2.0.1
+pyotp==2.5.0
+bandit==1.7.0
+safety==1.10.3

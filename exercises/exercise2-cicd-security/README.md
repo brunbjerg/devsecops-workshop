@@ -25,7 +25,7 @@ exercise2-cicd-pipeline/
 ├── app.py
 └── requirements.txt
 
-Environment Setup
+##Environment Setup
 To ensure that your Flask application is secure and follows best practices, it is important to manage the FLASK_DEBUG environment variable correctly.
 
 For Development: You can enable debug mode to get detailed error messages and the interactive debugger.
@@ -36,7 +36,7 @@ For Production: Debug mode should be disabled to prevent the exposure of sensiti
 
 
 export FLASK_DEBUG=false  # for production
-Addressing the Flask Debug Mode Issue
+##Addressing the Flask Debug Mode Issue
 Bandit has flagged the use of debug=True in your Flask application as a security risk because it exposes the Werkzeug debugger, which can execute arbitrary code. Here’s how to resolve it:
 
 Modify app.py to Control Debug Mode with Environment Variables:
@@ -57,7 +57,7 @@ if __name__ == '__main__':
     debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
     app.run(debug=debug_mode)
 
-GitHub Actions Workflow
+##GitHub Actions Workflow
 The CI/CD pipeline is configured using GitHub Actions, specifically through the .github/workflows/security.yml file. This workflow is the core of the CI/CD pipeline and will automatically run on every push or pull request.
 
 What the Workflow Does:
@@ -67,7 +67,7 @@ Runs pip-audit: Scans your Python dependencies for known vulnerabilities.
 Executes Pre-Commit Hooks (if configured): Ensures that all configured pre-commit hooks are run.
 The workflow ensures that your code is secure before it gets merged into the main branch, providing an automated layer of security.
 
-Running Locally
+##Running Locally
 To run the Flask application locally, follow these steps:
 
 Set Up Your Environment: Ensure that the necessary dependencies are installed:
@@ -102,6 +102,7 @@ Ensure that all checks pass, including the Bandit scan and pip-audit.
 Review and Fix Issues:
 
 If any issues are flagged by Bandit or pip-audit, fix them in your code and push the changes again. The pipeline will re-run automatically.
+
 Conclusion
 By following these steps, you have set up a minimal yet effective CI/CD pipeline that enforces security best practices for a Python Flask application. This setup integrates automated security checks into your development workflow, ensuring that your application is secure and ready for production deployment.
 
