@@ -19,15 +19,15 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install bandit safety
-      working-directory: exercises/exercise3-advanced-security-testing
+      working-directory: exercises/exercise3-automated-security-testing
 
     - name: Run Bandit for static analysis
       run: bandit -r .
-      working-directory: exercises/exercise3-advanced-security-testing
+      working-directory: exercises/exercise3-automated-security-testing
 
     - name: Run Safety for dependency checks
       run: safety check
-      working-directory: exercises/exercise3-advanced-security-testing
+      working-directory: exercises/exercise3-automated-security-testing
 
     - name: Run OWASP ZAP for DAST
       uses: zaproxy/action-full-scan@v0.6.0
