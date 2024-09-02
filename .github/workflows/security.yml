@@ -18,12 +18,16 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install bandit pip-audit pre-commit
+      working-directory: exercises/exercise2-cicd-security
 
     - name: Run Bandit for static analysis
       run: bandit -r .
+      working-directory: exercises/exercise2-cicd-security
 
     - name: Run Pip-Audit for dependency checks
       run: pip-audit
+      working-directory: exercises/exercise2-cicd-security
 
     - name: Run Pre-Commit hooks
       run: pre-commit run --all-files
+      working-directory: exercises/exercise2-cicd-security
