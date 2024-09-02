@@ -19,15 +19,15 @@ jobs:
       run: |
         pip install -r requirements.txt
         pip install bandit safety
-      working-directory: exercises/ex4-cicd-security-gates
+      working-directory: exercises/exercise4-cicd-security-gates
 
     - name: Run Bandit for static analysis
       run: bandit -r .
-      working-directory: exercises/ex4-cicd-security-gates
+      working-directory: exercises/exercise4-cicd-security-gates
 
     - name: Run Safety for dependency checks
       run: safety check
-      working-directory: exercises/ex4-cicd-security-gates
+      working-directory: exercises/exercise4-cicd-security-gates
 
     - name: Run OWASP ZAP for DAST
       uses: zaproxy/action-full-scan@v0.6.0
