@@ -1,0 +1,15 @@
+{
+    "name": "DevSecOps Workshop",
+    "image": "mcr.microsoft.com/vscode/devcontainers/python:3.9",
+    "features": {
+      "docker-in-docker": "latest"
+    },
+    "postCreateCommand": "pip install bandit",
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+      "ms-python.python",
+      "github.vscode-github-actions"
+    ]
+  }

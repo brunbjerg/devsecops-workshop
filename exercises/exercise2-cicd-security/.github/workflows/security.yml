@@ -1,0 +1,29 @@
+name: Security-Focused CI/CD Pipeline
+
+on: [push, pull_request]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.9'
+
+    - name: Install dependencies
+      run: |
+        pip install -r requirements.txt
+        pip install bandit pip-audit pre-commit
+
+    - name: Run Bandit for static analysis
+      run: bandit -r .
+
+    - name: Run Pip-Audit for dependency checks
+      run: pip-audit
+
+    - name: Run Pre-Commit hooks
+      run: pre-commit run --all-files
