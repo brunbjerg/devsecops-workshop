@@ -1,0 +1,6 @@
+Flask==2.0.1
+pyjwt==2.1.0
+bcrypt==3.2.0
+cryptography==3.4.7
+pre-commit==2.13.0
+bandit==1.7.0

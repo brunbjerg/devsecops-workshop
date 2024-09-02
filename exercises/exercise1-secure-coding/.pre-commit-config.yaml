@@ -1,0 +1,12 @@
+repos:
+  - repo: https://github.com/PyCQA/bandit
+    rev: 'latest'
+    hooks:
+      - id: bandit
+        args: ['-r', '.']
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: 'v3.4.0'
+    hooks:
+      - id: detect-secrets
+      - id: check-added-large-files
+      - id: check-yaml
