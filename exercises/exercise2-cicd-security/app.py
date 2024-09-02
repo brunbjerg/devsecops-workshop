@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import bcrypt
-import os
 
 app = Flask(__name__)
 
@@ -27,5 +26,4 @@ def login():
     return jsonify({"message": "Invalid credentials"}), 401
 
 if __name__ == '__main__':
-    debug_mode = os.getenv('FLASK_DEBUG', 'False').lower() == 'true'
-    app.run(debug=debug_mode)
+    app.run(debug=True)
