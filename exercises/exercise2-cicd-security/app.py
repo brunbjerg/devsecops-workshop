@@ -1,6 +1,6 @@
 from flask import Flask, request, jsonify
 import bcrypt
-
+import os
 app = Flask(__name__)
 
 users = {}
